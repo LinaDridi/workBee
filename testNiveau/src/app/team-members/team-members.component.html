@@ -1,0 +1,33 @@
+<h3>the complete list</h3>
+<div *ngFor="let team of list  ">
+  <p> name : {{team.name}} city : {{team.city}} state : {{team.state}} </p>
+  <p>Members' List</p>
+  <div *ngFor="let member of team.members">
+    <!-- if liste no concatenated yet -->
+    <p aria-hidden="true" *ngIf="member?.lastName"> Firstname :{{member.firstName}} Lastname :{{member.lastName}} Role : {{member.role}} </p>
+    <!-- if list already concatenanted -->
+    <p aria-hidden="true" *ngIf="member?.fullName"> Fullname :{{member.fullName}} Role : {{member.role}} </p>
+  </div>
+</div>
+
+<!-- controlling list filtering also in display -->
+<h3>List after filter/sort/concatenate </h3>
+<div *ngFor="let team of list  ">
+  <div aria-hidden="true" *ngIf="team?.state == myState">
+    <p>name : {{team.name}} city : {{team.city}} state : {{team.state}} </p>
+    <p>Members' List</p>
+    <div *ngFor="let member of team.members">
+      <div aria-hidden="true" *ngIf="member?.role == myRole1 || member?.role == myRole2">
+        <!-- if liste no concatenated yet -->
+        <p aria-hidden="true" *ngIf="member?.lastName"> Firstname :{{member.firstName}} Lastname :{{member.lastName}} Role : {{member.role}} </p>
+        <!-- if list already concatenanted -->
+        <p aria-hidden="true" *ngIf="member?.fullName"> Fullname :{{member.fullName}} Role : {{member.role}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- choose option -->
+<button (click)="filtered()">filter</button>
+<button (click)="sortByFirstName()">Sort By FirstName</button>
+<button (click)="sortByLastName()">Sort By LastName</button>
+<button (click)="concatenate()">concatenate firstname and lastname</button>
